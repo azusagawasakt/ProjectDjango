@@ -1,17 +1,28 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <img src="{% static 'img/logo.png' %}">
 </head>
 <body>
     <h1>Hello, {{ user }}</h1>
 
-{% if user %}
-    <p>Вы вошли в систему</p>
-{% else %}
-    <p>Гость</p>
-{% endif %}
+    {% if user %}
+        <p>Вы ВОШЛИ В СИСТЕМУ</p>
+    {% else %}
+        <p>Гость</p>
+    {% endif %}
+
+    {% extends 'main/base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<h1>Добро пожаловать</h1>
+{% endblock %}
 
 </body>
 </html>
