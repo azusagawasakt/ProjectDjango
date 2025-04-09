@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+
+  <script>
+
+    $(window, document, undefined).ready(function () {
+
+      $('input').blur(function () {
+        var $this = $(this);
+        if ($this.val())
+          $this.addClass('used');
+        else
+          $this.removeClass('used');
+      });
+
+      var $ripples = $('.ripples');
+
+      $ripples.on('click.Ripples', function (e) {
+
+        var $this = $(this);
+        var $offset = $this.parent().offset();
+        var $circle = $this.find('.ripplesCircle');
+
+        var x = e.pageX - $offset.left;
+        var y = e.pageY - $offset.top;
+
+        $circle.css({
+          top: y + 'px',
+          left: x + 'px'
+        });
+
+        $this.addClass('is-active');
+
+      });
+
+      $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function (e) {
+        $(this).removeClass('is-active');
+      });
+
+    });
+
+  </script>
+
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Poppins;
+      background: rgb(39, 39, 39);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 100px;
+      width: 35rem;
+      height: 35rem;
+      border-radius: 50px;
+      box-shadow: 6px 6px 4px rgba(0, 0, 0, 0.248), -6px -6px 4px rgb(48, 48, 48);
+      display: flex;
+      justify-content: center;
+    }
+
+    form {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      top: 2rem;
+    }
+
+    .form-title {
+      position: relative;
+      background-color: rgb(39, 39, 39);
+      margin-top: 25px;
+      bottom: 2rem;
+      display: flex;
+      font-size: 50px;
+      font-weight: 600;
+      color: rgb(245, 24, 101);
+      user-select: none;
+      text-shadow: 6px 6px 4px rgba(10, 10, 10, 0.241);
+    }
+
+    .form-input {
+      position: relative;
+      margin: 20px;
+      width: 25rem;
+      height: 4rem;
+      padding: 0 20px;
+      background: rgb(39, 39, 39);
+      border: none;
+      border-radius: 30px;
+      outline: none;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: rgb(245, 24, 101);
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.179), -4px -4px 4px rgb(48, 48, 48);
+    }
+
+    .form-input::-moz-placeholder {
+      color: rgb(79, 79, 79);
+    }
+
+    .form-input::placeholder {
+      color: rgb(79, 79, 79);
+    }
+
+    .form-input:focus {
+      box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.179), 4px 4px 4px rgb(48, 48, 48);
+    }
+
+    button {
+      width: 150px;
+      height: 60px;
+      border: 0;
+      font-size: 25px;
+      font-weight: 600;
+      margin: 2.5rem;
+      border-radius: 30px;
+      color: rgb(245, 24, 101);
+      background: rgb(39, 39, 39);
+      cursor: pointer;
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.248), -4px -4px 4px rgb(48, 48, 48);
+    }
+
+    button:active {
+      transform: scale(0.9);
+    }
+
+    .create {
+      font-size: 19px;
+      text-decoration: none;
+      color: #ffffff;
+    }
+
+    .create:hover {
+      color: rgb(245, 24, 101);
+    }
+
+    .errors {
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+    }
+
+    h4 {
+      font-size: 1rem;
+      color: red;
+    }
+
+    ::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    ::-webkit-scrollbar-track {
+
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+    }
+
+    ::-webkit-scrollbar-thumb {
+
+      background-color: black;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgb(245, 24, 101);
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <h2 class="form-title">Login</h2>
+      <input class="form-input" type="text" name="username" placeholder="Username" required>
+      <input class="form-input" type="password" name="password" placeholder="Password" required>
+      <button type="submit">Login </button>
+      <a href="{% url 'signup' %}" class="create">Don't have an account? Create one</a>
+    </form>
+  </div>
+  <div class="errors">
+    {% if error %}
+    <h4>{{ error }}</h4>
+    {% endif %}
+  </div>
+  </div>
+</body>
+
+</html>
