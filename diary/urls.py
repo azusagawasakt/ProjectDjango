@@ -18,7 +18,7 @@ from django.urls import path,include
 from accounts.views import home 
 from accounts import urls
 from Mydiary.views import show,add
-
+ 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
