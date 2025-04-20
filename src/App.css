@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  outline: none;
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+}
+
+.App {
+  text-align: center;
+}
+
+h1 {
+  font-size: 25px;
+  margin: 0;
+  margin-left: 20px;
+  color: white;
+  font-weight: 50;
+  font-family: "Pacifico", cursive;
+}
+
+.AddListInput::placeholder {
+  color: white;
+}
+
+.AddListInput:focus .AddInputBox {
+  border-color: white;
+}
+
+.ListContainer {
+  overflow: auto;
+  background-color: rgba(121, 165, 234, 0.2);
+  border-radius: 6px;
+}
+
+.ListTitleContainer {
+  height: 40px;
+  margin: 10px;
+  margin-top: 5px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ListTitle {
+  margin-left: 5px;
+  font-size: 17px;
+  color: #300c1b;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: bold;
+}
+
+.RemoveButtonContainer {
+  width: 20px;
+  height: 20px;
+  border: solid;
+  border-width: thin;
+  border-radius: 3px;
+  border-color: rgba(121, 165, 234, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.RemoveButtonContainer:hover .RemoveButtonSymbol {
+  color: #ffffff;
+}
+
+.RemoveButtonContainer:hover {
+  border-color: #ffffff;
+}
+
+.RemoveButtonSymbol {
+  font-size: 20px;
+  color: rgb(121, 165, 234);
+}
+
+.CardInputBoxContainer {
+  /* height: 90px; */
+  /* background-color: lightblue; */
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.ColumnContainer {
+  padding: 10px;
+  width: 100vw;
+  height: 800px;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: row;
+}
+
+@keyframes expand {
+  from {
+    width: 180px;
+    background-color: rgba(220, 227, 241, 0.5);
+  }
+  to {
+    width: 280px;
+    background-color: "white";
+  }
+}
+
+.inputAnimate {
+  animation-name: expand;
+  animation-duration: 0.333s;
+}
