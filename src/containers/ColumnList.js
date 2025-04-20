@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CardInput from "./CardInput";
-import CardItem from "./CardItem"; /// this is the draggable
+import CardItem from "./CardItem";
 import { connect } from "react-redux";
 import { Draggable, Droppable } from "react-beautiful-dnd";
 import styled from "styled-components";
@@ -9,7 +9,7 @@ import type {
   DraggableStateSnapshot
 } from "react-beautiful-dnd";
 
-//// styled components...
+
 const Wrapper = styled.div`
   margin-top: 10px;
   width: 270px;
