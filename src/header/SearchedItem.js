@@ -22,7 +22,7 @@ const SearchItem = styled.div`
   height: 50px;
   background-color: orange;
   border-radius: 5px;
-  border-color: black
+  border-color: black;
   border-width: thin;
   transition: height 200ms 0ms,  width 200ms 0ms;
 `;
