@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой дневник</title>
+    <style>
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-date {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+
+        .calendar-date:hover {
+            background-color: #e0e0e0;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+
+        a {
+            color: blue;
+        }
+
+        .entry {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Дневник</h1>
+
+    {% if user.is_authenticated %}
+        <p>Вы вошли как {{ user.username }} | <a href="{% url 'logout' %}">Выйти</a></p>
+        <p><a href="{% url 'create_entry' %}">Создать новую запись</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a></p>
+    {% endif %}
+
+    <form method="get">
+        <input type="text" name="q" placeholder="Поиск по заголовку..." value="{{ query }}">
+        <button type="submit">Поиск</button>
+    </form>
+
+    <h2>Календарь</h2>
+    <div class="calendar">
+        {% for day in days %}
+            <div class="calendar-date" data-date="2025-05-{{ day }}">{{ day }}</div>
+        {% endfor %}
+    </div>
+
+    <h2>Ваши записи</h2>
+    {% if entries %}
+        {% for entry in entries %}
+            <div class="entry">
+                <strong>{{ entry.title }}</strong> ({{ entry.created_at|date:"Y-m-d H:i" }})<br>
+                {{ entry.content|linebreaks }}
+                <br>
+                <a href="{% url 'delete_entry' entry.id %}">Удалить</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет записей.</p>
+    {% endif %}
+
+    <script src="{% static 'calendar.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
